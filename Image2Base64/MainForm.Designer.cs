@@ -62,7 +62,30 @@
             this.t1_imageList = new System.Windows.Forms.ListView();
             this.xImageList = new System.Windows.Forms.ImageList(this.components);
             this.stateImageList = new System.Windows.Forms.ImageList(this.components);
+            this.tab2 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.t2_rPath = new System.Windows.Forms.RadioButton();
+            this.t2_rSingle = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.t2_bSelect = new System.Windows.Forms.Button();
+            this.t2_tPath = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.t2_tTotal = new System.Windows.Forms.Label();
+            this.t2_tCurrent = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.t2_bStart = new System.Windows.Forms.Button();
+            this.t2_bStop = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.t2_cbDeleteImage = new System.Windows.Forms.CheckBox();
+            this.t2_cbDeleteEmptyDir = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.t2_log = new System.Windows.Forms.TextBox();
+            this.lProceed = new System.Windows.Forms.Label();
             this.tabAbout = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label11 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -71,10 +94,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ToolTip_Default = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.runWorker = new System.ComponentModel.BackgroundWorker();
-            this.label11 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label12 = new System.Windows.Forms.Label();
+            this.t1_backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.openCssFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.t2_backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.tabs.SuspendLayout();
             this.tab1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,6 +105,13 @@
             this.btnGroup.SuspendLayout();
             this.configGroup.SuspendLayout();
             this.imgGroup.SuspendLayout();
+            this.tab2.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -93,10 +123,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabs.Controls.Add(this.tab1);
+            this.tabs.Controls.Add(this.tab2);
             this.tabs.Controls.Add(this.tabAbout);
             this.tabs.Location = new System.Drawing.Point(12, 12);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
+            this.tabs.ShowToolTips = true;
             this.tabs.Size = new System.Drawing.Size(836, 484);
             this.tabs.TabIndex = 0;
             // 
@@ -114,6 +146,7 @@
             this.tab1.Size = new System.Drawing.Size(828, 458);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "处理图片";
+            this.tab1.ToolTipText = "将选择的图片生成一个CSS文件";
             this.tab1.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -454,6 +487,239 @@
             this.stateImageList.ImageSize = new System.Drawing.Size(16, 16);
             this.stateImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // tab2
+            // 
+            this.tab2.Controls.Add(this.groupBox8);
+            this.tab2.Controls.Add(this.groupBox7);
+            this.tab2.Controls.Add(this.groupBox6);
+            this.tab2.Controls.Add(this.groupBox5);
+            this.tab2.Controls.Add(this.groupBox4);
+            this.tab2.Controls.Add(this.groupBox3);
+            this.tab2.Controls.Add(this.lProceed);
+            this.tab2.Location = new System.Drawing.Point(4, 22);
+            this.tab2.Name = "tab2";
+            this.tab2.Padding = new System.Windows.Forms.Padding(3);
+            this.tab2.Size = new System.Drawing.Size(828, 458);
+            this.tab2.TabIndex = 2;
+            this.tab2.Text = "处理CSS文件";
+            this.tab2.ToolTipText = "替换CSS文件内的图片地址为Base64编码";
+            this.tab2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.t2_rPath);
+            this.groupBox8.Controls.Add(this.t2_rSingle);
+            this.groupBox8.Location = new System.Drawing.Point(568, 13);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(254, 71);
+            this.groupBox8.TabIndex = 34;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "处理类型";
+            // 
+            // t2_rPath
+            // 
+            this.t2_rPath.AutoSize = true;
+            this.t2_rPath.BackColor = System.Drawing.Color.White;
+            this.t2_rPath.Location = new System.Drawing.Point(16, 42);
+            this.t2_rPath.Name = "t2_rPath";
+            this.t2_rPath.Size = new System.Drawing.Size(125, 16);
+            this.t2_rPath.TabIndex = 1;
+            this.t2_rPath.Text = "目录下所有CSS文件";
+            this.t2_rPath.UseVisualStyleBackColor = false;
+            // 
+            // t2_rSingle
+            // 
+            this.t2_rSingle.AutoSize = true;
+            this.t2_rSingle.BackColor = System.Drawing.Color.White;
+            this.t2_rSingle.Checked = true;
+            this.t2_rSingle.Location = new System.Drawing.Point(16, 20);
+            this.t2_rSingle.Name = "t2_rSingle";
+            this.t2_rSingle.Size = new System.Drawing.Size(89, 16);
+            this.t2_rSingle.TabIndex = 0;
+            this.t2_rSingle.TabStop = true;
+            this.t2_rSingle.Text = "单个CSS文件";
+            this.t2_rSingle.UseVisualStyleBackColor = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.t2_bSelect);
+            this.groupBox7.Controls.Add(this.t2_tPath);
+            this.groupBox7.Location = new System.Drawing.Point(3, 13);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(556, 58);
+            this.groupBox7.TabIndex = 33;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "选择CSS文件或目录";
+            // 
+            // t2_bSelect
+            // 
+            this.t2_bSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_bSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.t2_bSelect.Location = new System.Drawing.Point(501, 18);
+            this.t2_bSelect.Name = "t2_bSelect";
+            this.t2_bSelect.Size = new System.Drawing.Size(45, 23);
+            this.t2_bSelect.TabIndex = 2;
+            this.t2_bSelect.Text = "浏览";
+            this.t2_bSelect.UseVisualStyleBackColor = true;
+            this.t2_bSelect.Click += new System.EventHandler(this.t2_bSelect_Click);
+            // 
+            // t2_tPath
+            // 
+            this.t2_tPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_tPath.Location = new System.Drawing.Point(6, 20);
+            this.t2_tPath.Name = "t2_tPath";
+            this.t2_tPath.Size = new System.Drawing.Size(482, 21);
+            this.t2_tPath.TabIndex = 1;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.t2_tTotal);
+            this.groupBox6.Controls.Add(this.t2_tCurrent);
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Location = new System.Drawing.Point(568, 264);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(254, 53);
+            this.groupBox6.TabIndex = 32;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "处理进度";
+            // 
+            // t2_tTotal
+            // 
+            this.t2_tTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_tTotal.Location = new System.Drawing.Point(161, 19);
+            this.t2_tTotal.Name = "t2_tTotal";
+            this.t2_tTotal.Size = new System.Drawing.Size(86, 23);
+            this.t2_tTotal.TabIndex = 23;
+            this.t2_tTotal.Text = "0";
+            this.t2_tTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // t2_tCurrent
+            // 
+            this.t2_tCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_tCurrent.Location = new System.Drawing.Point(53, 19);
+            this.t2_tCurrent.Name = "t2_tCurrent";
+            this.t2_tCurrent.Size = new System.Drawing.Size(81, 23);
+            this.t2_tCurrent.TabIndex = 24;
+            this.t2_tCurrent.Text = "0";
+            this.t2_tCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.Location = new System.Drawing.Point(140, 19);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(18, 23);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "/";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.t2_bStart);
+            this.groupBox5.Controls.Add(this.t2_bStop);
+            this.groupBox5.Location = new System.Drawing.Point(568, 186);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(254, 72);
+            this.groupBox5.TabIndex = 31;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "操作";
+            // 
+            // t2_bStart
+            // 
+            this.t2_bStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.t2_bStart.Location = new System.Drawing.Point(47, 30);
+            this.t2_bStart.Name = "t2_bStart";
+            this.t2_bStart.Size = new System.Drawing.Size(75, 25);
+            this.t2_bStart.TabIndex = 20;
+            this.t2_bStart.Text = "开始";
+            this.t2_bStart.UseVisualStyleBackColor = true;
+            this.t2_bStart.Click += new System.EventHandler(this.t2_bStart_Click);
+            // 
+            // t2_bStop
+            // 
+            this.t2_bStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.t2_bStop.Location = new System.Drawing.Point(130, 30);
+            this.t2_bStop.Name = "t2_bStop";
+            this.t2_bStop.Size = new System.Drawing.Size(75, 25);
+            this.t2_bStop.TabIndex = 21;
+            this.t2_bStop.Text = "停止";
+            this.t2_bStop.UseVisualStyleBackColor = true;
+            this.t2_bStop.Click += new System.EventHandler(this.t2_bStop_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.t2_cbDeleteImage);
+            this.groupBox4.Controls.Add(this.t2_cbDeleteEmptyDir);
+            this.groupBox4.Location = new System.Drawing.Point(568, 97);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(254, 74);
+            this.groupBox4.TabIndex = 30;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "选项";
+            // 
+            // t2_cbDeleteImage
+            // 
+            this.t2_cbDeleteImage.AutoSize = true;
+            this.t2_cbDeleteImage.Location = new System.Drawing.Point(13, 21);
+            this.t2_cbDeleteImage.Name = "t2_cbDeleteImage";
+            this.t2_cbDeleteImage.Size = new System.Drawing.Size(144, 16);
+            this.t2_cbDeleteImage.TabIndex = 27;
+            this.t2_cbDeleteImage.Text = "删除处理过的图片文件";
+            this.t2_cbDeleteImage.UseVisualStyleBackColor = true;
+            // 
+            // t2_cbDeleteEmptyDir
+            // 
+            this.t2_cbDeleteEmptyDir.AutoSize = true;
+            this.t2_cbDeleteEmptyDir.Location = new System.Drawing.Point(13, 43);
+            this.t2_cbDeleteEmptyDir.Name = "t2_cbDeleteEmptyDir";
+            this.t2_cbDeleteEmptyDir.Size = new System.Drawing.Size(84, 16);
+            this.t2_cbDeleteEmptyDir.TabIndex = 28;
+            this.t2_cbDeleteEmptyDir.Text = "移除空目录";
+            this.t2_cbDeleteEmptyDir.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.t2_log);
+            this.groupBox3.Location = new System.Drawing.Point(3, 77);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(556, 375);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "处理日志";
+            // 
+            // t2_log
+            // 
+            this.t2_log.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_log.BackColor = System.Drawing.Color.White;
+            this.t2_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.t2_log.Location = new System.Drawing.Point(6, 20);
+            this.t2_log.Multiline = true;
+            this.t2_log.Name = "t2_log";
+            this.t2_log.ReadOnly = true;
+            this.t2_log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.t2_log.Size = new System.Drawing.Size(540, 349);
+            this.t2_log.TabIndex = 19;
+            // 
+            // lProceed
+            // 
+            this.lProceed.AutoSize = true;
+            this.lProceed.Location = new System.Drawing.Point(83, 101);
+            this.lProceed.Name = "lProceed";
+            this.lProceed.Size = new System.Drawing.Size(0, 12);
+            this.lProceed.TabIndex = 26;
+            // 
             // tabAbout
             // 
             this.tabAbout.Controls.Add(this.label12);
@@ -471,14 +737,49 @@
             this.tabAbout.Size = new System.Drawing.Size(828, 458);
             this.tabAbout.TabIndex = 1;
             this.tabAbout.Text = "关于";
-            this.tabAbout.ToolTipText = "Use Base64 Instead of Image-URL in CSS File(s)";
             this.tabAbout.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label12.BackColor = System.Drawing.Color.DodgerBlue;
+            this.label12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(398, 96);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(195, 25);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Javascript中文社区";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(436, 207);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(167, 12);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "http://www.hyjiacan.com/i2b";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(399, 208);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "网站";
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(251, 73);
+            this.pictureBox2.Location = new System.Drawing.Point(503, 163);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(90, 22);
             this.pictureBox2.TabIndex = 7;
@@ -488,9 +789,10 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(184, 80);
+            this.textBox1.Location = new System.Drawing.Point(436, 170);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(73, 14);
@@ -499,8 +801,9 @@
             // 
             // label10
             // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(147, 81);
+            this.label10.Location = new System.Drawing.Point(399, 171);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 12);
             this.label10.TabIndex = 4;
@@ -508,8 +811,9 @@
             // 
             // label9
             // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(182, 48);
+            this.label9.Location = new System.Drawing.Point(434, 138);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 3;
@@ -517,8 +821,9 @@
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(147, 48);
+            this.label8.Location = new System.Drawing.Point(399, 138);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 1;
@@ -526,8 +831,9 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(255, 93);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 128);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -538,41 +844,18 @@
             // 
             this.openFileDialog.Multiselect = true;
             // 
-            // runWorker
+            // t1_backgroundWorker
             // 
-            this.runWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.t1_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t1_backgroundWorker_DoWork);
             // 
-            // label11
+            // openCssFileDialog
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(147, 118);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 12);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "网站";
+            this.openCssFileDialog.FileName = "openFileDialog1";
+            this.openCssFileDialog.Filter = "层叠样式表文件|*.css";
             // 
-            // linkLabel1
+            // t2_backgroundWorker
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(184, 117);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(143, 12);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "http://www.hyjiacan.com";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.Color.DodgerBlue;
-            this.label12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(146, 6);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(195, 25);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Javascript中文社区";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.t2_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t1_backgroundWorker_DoWork);
             // 
             // MainForm
             // 
@@ -597,6 +880,18 @@
             this.configGroup.PerformLayout();
             this.imgGroup.ResumeLayout(false);
             this.imgGroup.PerformLayout();
+            this.tab2.ResumeLayout(false);
+            this.tab2.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabAbout.ResumeLayout(false);
             this.tabAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -632,7 +927,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView t1_imageList;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.ComponentModel.BackgroundWorker runWorker;
+        private System.ComponentModel.BackgroundWorker t1_backgroundWorker;
         private System.Windows.Forms.ImageList xImageList;
         private System.Windows.Forms.ImageList stateImageList;
         private System.Windows.Forms.TextBox t1_tStyleName;
@@ -652,5 +947,28 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tab2;
+        private System.Windows.Forms.TextBox t2_log;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox t2_cbDeleteEmptyDir;
+        private System.Windows.Forms.CheckBox t2_cbDeleteImage;
+        private System.Windows.Forms.Label lProceed;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label t2_tCurrent;
+        private System.Windows.Forms.Label t2_tTotal;
+        private System.Windows.Forms.Button t2_bStop;
+        private System.Windows.Forms.Button t2_bStart;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton t2_rPath;
+        private System.Windows.Forms.RadioButton t2_rSingle;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.OpenFileDialog openCssFileDialog;
+        private System.Windows.Forms.Button t2_bSelect;
+        private System.Windows.Forms.TextBox t2_tPath;
+        private System.ComponentModel.BackgroundWorker t2_backgroundWorker;
     }
 }

@@ -19,13 +19,18 @@ namespace hyjiacan.util.i2b
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// 初始化数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
             tab1Init();
+            tab2Init();
         }
 
         #region tab1
@@ -98,7 +103,7 @@ namespace hyjiacan.util.i2b
             if (t1_imageList.Items.Count > 0)
             {
                 t1_log.Text = "开始生成...";
-                runWorker.RunWorkerAsync();
+                t1_backgroundWorker.RunWorkerAsync();
             }
             else
             {
@@ -106,7 +111,7 @@ namespace hyjiacan.util.i2b
             }
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void t1_backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -261,6 +266,303 @@ namespace hyjiacan.util.i2b
 
         #endregion
 
+        #region tab2
+        // 工作目录
+        string path;
+        // 当前扫描目录
+        string currentPath;
+        // 要删除的图片文件
+        List<string> delImgs;
+        // 需要处理的目录列表
+        List<string> dirs;
+
+        private void tab2Init()
+        {
+            path = Environment.CurrentDirectory;
+            delImgs = new List<string>();
+            dirs = new List<string>();
+        }
+        /// <summary>
+        /// 选择CSS文件或目录 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void t2_bSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// 开始处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void t2_bStart_Click(object sender, EventArgs e)
+        {
+            t2_backgroundWorker.RunWorkerAsync();
+        }
+        /// <summary>
+        /// 停止处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void t2_bStop_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// 使用BASE64替换图片地址
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        string ReplaceURL(Match match)
+        {
+            string base64 = match.Value;
+            if (!match.Success)
+            {
+                return base64;
+            }
+
+            //取匹配结果中的子项
+            GroupCollection grps = match.Groups;
+            if (grps.Count <= 1)
+            {
+                return base64;
+            }
+
+            // 匹配到了地址
+            string url = grps[1].Value;
+
+            if (string.IsNullOrEmpty(url))
+            {
+                return base64;
+            }
+
+            url = url.Trim(new char[] { '\t', ' ', '"', '\'' });
+
+            try
+            {
+                // 图片的地址
+                string imgname = Path.Combine(currentPath, url);
+                if (!File.Exists(imgname))
+                {
+                    return base64;
+                }
+                // 判断是否是图片
+                if (string.Empty == GetMime(imgname))
+                {
+                    return base64;
+                }
+                base64 = "url(\"" + GetBase64(imgname) + "\")";
+                delImgs.Add(imgname);
+
+                return base64;
+            }
+            catch
+            {
+                return base64;
+            }
+        }
+
+        /// <summary>
+        /// 处理CSS文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void t2_backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                delImgs.Clear();
+                dirs.Clear();
+                x("开始扫描...");
+                // 扫描当前目录
+                List<string> files = EnumFile(path, new string[] { ".css" });
+                x("共扫描到" + files.Count + "个CSS文件");
+                if (files.Count == 0)
+                {
+                    return;
+                }
+
+                t2_tTotal.Text = files.Count.ToString();
+                int proceed = 0;
+                if (MessageBox.Show(this, "共扫描到" + files.Count + "个CSS文件，是否开始处理？", "扫描完成", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    x("开始处理...");
+                    Regex reg = new Regex(@"url\s*\(\s*[\'\""]{0,1}\s*(.+?\.(png|jpg|jpeg|bmp|gif|svg))\s*[\'\""]{0,1}\s*\)", RegexOptions.IgnoreCase & RegexOptions.Multiline);
+                    foreach (string filename in files)
+                    {
+                        currentPath = Path.GetDirectoryName(filename);
+                        this.Invoke(new MethodInvoker(delegate
+                        {
+                            t2_tCurrent.Text = (++proceed).ToString();
+                        }));
+                        //读取　CSS文件内容                        
+                        string content = string.Empty;
+                        StreamReader sr = new StreamReader(filename);
+                        content = sr.ReadToEnd();
+                        sr.Close();
+
+                        if (!reg.IsMatch(content))
+                        {
+                            x("-不需处理-" + filename);
+                            continue;
+                        }
+
+                        x("处理文件" + filename);
+                        string newContent = reg.Replace(content, new MatchEvaluator(ReplaceURL));
+                        // 写文件
+                        using (StreamWriter sw = new StreamWriter(filename))
+                        {
+                            sw.Write(newContent);
+                            sw.Flush();
+                            sw.Close();
+                        }
+                    }
+                    // 删除图片文件
+                    if (t2_cbDeleteImage.Checked)
+                    {
+                        x("删除处理过的图片...");
+                        foreach (string filename in delImgs)
+                        {
+                            try
+                            {
+                                File.Delete(filename);
+                                string dir = Path.GetDirectoryName(filename);
+                                if (!dirs.Contains(dir))
+                                {
+                                    dirs.Add(dir);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                x(ex.Message);
+                            }
+                        }
+                    }
+                    // 排序，名称最长的是子目录
+                    dirs.Sort(xSort);
+                    foreach (string dir in dirs)
+                    {
+                        if (Directory.GetFileSystemEntries(dir).Length == 0)
+                        {
+                            try { Directory.Delete(dir); }
+                            catch (Exception ex)
+                            {
+                                x(ex.Message);
+                            }
+                        }
+                    }
+                }
+                x("处理结束");
+            }
+            catch (Exception ex)
+            {
+                t2_log.Text = ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// 对目录排序，使目录从子到根（目录名长度从长到短）排序
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private int xSort(string y, string x)
+        {
+            if (x == null && y == null)
+            {
+                return 0;
+            }
+
+            if (x == null)
+            {
+                return -1;
+            }
+
+            if (y == null)
+            {
+                return 1;
+            }
+
+            int xLen = x.Length;
+            int yLen = y.Length;
+            if (xLen == yLen)
+            {
+                return 0;
+            }
+
+            if (xLen > yLen)
+            {
+                return 1;
+            }
+            return -1;
+
+        }
+        /// <summary>
+        /// 遍历指定目录下的文件
+        /// </summary>
+        /// <param name="path">要遍历的路径</param>
+        /// <param name="pattern">匹配的文件扩展名 需要包含 .</param>
+        /// <param name="currentPathOnly">是否只遍历当前目录（不处理子目录），默认为false（处理子目录）</param>
+        /// <returns>所有文件列表</returns>
+        public static List<string> EnumFile(string path, string[] pattern, bool currentPathOnly = false)
+        {
+            List<string> files = new List<string>();
+            // 检查目录是否存在
+            if (!Directory.Exists(path))
+            {
+                return files;
+            }
+
+            FileSystemInfo[] fs = new DirectoryInfo(path).GetFileSystemInfos();
+
+            foreach (FileSystemInfo fsi in fs)
+            {
+                if ((fsi.Attributes & FileAttributes.System) == FileAttributes.System)
+                { // 跳过系统
+                    continue;
+                }
+                if ((fsi.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)
+                { // 跳过隐藏
+                    continue;
+                }
+                if ((fsi.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                {   // 目录
+                    files.AddRange(EnumFile(fsi.FullName, pattern, false));
+                    continue;
+                }
+
+                // 文件
+                if (pattern != null && pattern.Length > 0 && !new List<string>(string.Join(",", pattern).ToUpper().Split(new char[] { ',' })).Contains(fsi.Extension.ToUpper()))
+                { // 筛选指定的文件类型
+                    continue;
+                }
+                files.Add(fsi.FullName);
+            }
+
+            return files;
+        }
+        /// <summary>
+        /// 输出日志
+        /// </summary>
+        /// <param name="args"></param>
+        private void x(params object[] args)
+        {
+            if (args == null || args.Length == 0)
+            {
+                t2_log.AppendText(Environment.NewLine);
+                return;
+            }
+            foreach (object item in args)
+            {
+                if (item != null)
+                {
+                    t2_log.AppendText(item.ToString());
+                }
+            }
+            t2_log.AppendText(Environment.NewLine);
+        }
+        #endregion
 
         #region 公共功能
         /// <summary>
@@ -355,7 +657,7 @@ namespace hyjiacan.util.i2b
         {
             try
             {
-                Process.Start("http://www.hyjiacan.com?ref=i2b");
+                Process.Start("http://www.hyjiacan.com/i2b?ref=i2b");
             }
             catch (Exception ex)
             {
@@ -364,5 +666,7 @@ namespace hyjiacan.util.i2b
         }
 
         #endregion
+
+
     }
 }
