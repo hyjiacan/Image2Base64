@@ -278,7 +278,6 @@ namespace hyjiacan.util.i2b
 
         private void tab2Init()
         {
-            path = Environment.CurrentDirectory;
             delImgs = new List<string>();
             dirs = new List<string>();
         }
@@ -289,7 +288,20 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void t2_bSelect_Click(object sender, EventArgs e)
         {
-
+            if (t2_rPath.Checked)
+            {
+                if (folderBrowserDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    t2_tPath.Text = folderBrowserDialog.SelectedPath;
+                }
+            }
+            else
+            {
+                if (openCssFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    t2_tPath.Text = openCssFileDialog.FileName;
+                }
+            }
         }
         /// <summary>
         /// 开始处理
@@ -307,7 +319,11 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void t2_bStop_Click(object sender, EventArgs e)
         {
-
+            try { t2_backgroundWorker.CancelAsync(); }
+            catch (Exception ex)
+            {
+                x("停止失败", ex.Message);
+            }
         }
         /// <summary>
         /// 使用BASE64替换图片地址
@@ -374,18 +390,36 @@ namespace hyjiacan.util.i2b
             {
                 delImgs.Clear();
                 dirs.Clear();
-                x("开始扫描...");
-                // 扫描当前目录
-                List<string> files = EnumFile(path, new string[] { ".css" });
-                x("共扫描到" + files.Count + "个CSS文件");
-                if (files.Count == 0)
+
+                List<string> files = null;
+                path = t2_tPath.Text.Trim();
+                if (t2_rPath.Checked)
                 {
-                    return;
+                    x("开始扫描...");
+                    // 扫描目录
+                    if (!Directory.Exists(path))
+                    {
+                        x("路径", path, "不存在");
+                        return;
+                    }
+                    files = EnumFile(path, new string[] { ".css" });
+                    x("共扫描到" + files.Count + "个CSS文件");
+                    if (files.Count == 0)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    files = new List<string>(){
+                        path
+                    };
                 }
 
                 t2_tTotal.Text = files.Count.ToString();
                 int proceed = 0;
-                if (MessageBox.Show(this, "共扫描到" + files.Count + "个CSS文件，是否开始处理？", "扫描完成", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                if (MessageBox.Show(this, t2_rPath.Checked ? "共扫描到" + files.Count + "个CSS文件，是否开始处理？" : "是否立即处理？", "操作确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     x("开始处理...");
                     Regex reg = new Regex(@"url\s*\(\s*[\'\""]{0,1}\s*(.+?\.(png|jpg|jpeg|bmp|gif|svg))\s*[\'\""]{0,1}\s*\)", RegexOptions.IgnoreCase & RegexOptions.Multiline);
@@ -542,6 +576,12 @@ namespace hyjiacan.util.i2b
 
             return files;
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            t2_log.Clear();
+        }
+
         /// <summary>
         /// 输出日志
         /// </summary>
@@ -666,7 +706,6 @@ namespace hyjiacan.util.i2b
         }
 
         #endregion
-
 
     }
 }

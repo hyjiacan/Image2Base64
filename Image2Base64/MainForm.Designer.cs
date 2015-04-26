@@ -98,6 +98,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openCssFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.t2_backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tabs.SuspendLayout();
             this.tab1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -521,10 +522,12 @@
             // 
             this.t2_rPath.AutoSize = true;
             this.t2_rPath.BackColor = System.Drawing.Color.White;
+            this.t2_rPath.Checked = true;
             this.t2_rPath.Location = new System.Drawing.Point(16, 42);
             this.t2_rPath.Name = "t2_rPath";
             this.t2_rPath.Size = new System.Drawing.Size(125, 16);
             this.t2_rPath.TabIndex = 1;
+            this.t2_rPath.TabStop = true;
             this.t2_rPath.Text = "目录下所有CSS文件";
             this.t2_rPath.UseVisualStyleBackColor = false;
             // 
@@ -532,12 +535,10 @@
             // 
             this.t2_rSingle.AutoSize = true;
             this.t2_rSingle.BackColor = System.Drawing.Color.White;
-            this.t2_rSingle.Checked = true;
             this.t2_rSingle.Location = new System.Drawing.Point(16, 20);
             this.t2_rSingle.Name = "t2_rSingle";
             this.t2_rSingle.Size = new System.Drawing.Size(89, 16);
             this.t2_rSingle.TabIndex = 0;
-            this.t2_rSingle.TabStop = true;
             this.t2_rSingle.Text = "单个CSS文件";
             this.t2_rSingle.UseVisualStyleBackColor = false;
             // 
@@ -570,6 +571,8 @@
             // 
             this.t2_tPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.t2_tPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.t2_tPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.t2_tPath.Location = new System.Drawing.Point(6, 20);
             this.t2_tPath.Name = "t2_tPath";
             this.t2_tPath.Size = new System.Drawing.Size(482, 21);
@@ -689,6 +692,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.linkLabel2);
             this.groupBox3.Controls.Add(this.t2_log);
             this.groupBox3.Location = new System.Drawing.Point(3, 77);
             this.groupBox3.Name = "groupBox3";
@@ -848,14 +852,29 @@
             // 
             this.t1_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t1_backgroundWorker_DoWork);
             // 
+            // folderBrowserDialog
+            // 
+            this.folderBrowserDialog.ShowNewFolderButton = false;
+            // 
             // openCssFileDialog
             // 
-            this.openCssFileDialog.FileName = "openFileDialog1";
             this.openCssFileDialog.Filter = "层叠样式表文件|*.css";
             // 
             // t2_backgroundWorker
             // 
-            this.t2_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t1_backgroundWorker_DoWork);
+            this.t2_backgroundWorker.WorkerSupportsCancellation = true;
+            this.t2_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t2_backgroundWorker_DoWork);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(71, 0);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(29, 12);
+            this.linkLabel2.TabIndex = 20;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "清空";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // MainForm
             // 
@@ -970,5 +989,6 @@
         private System.Windows.Forms.Button t2_bSelect;
         private System.Windows.Forms.TextBox t2_tPath;
         private System.ComponentModel.BackgroundWorker t2_backgroundWorker;
+        private System.Windows.Forms.LinkLabel linkLabel2;
     }
 }
