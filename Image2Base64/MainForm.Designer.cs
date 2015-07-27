@@ -80,6 +80,7 @@
             this.t2_cbDeleteImage = new System.Windows.Forms.CheckBox();
             this.t2_cbDeleteEmptyDir = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.t2_log = new System.Windows.Forms.TextBox();
             this.lProceed = new System.Windows.Forms.Label();
             this.tabAbout = new System.Windows.Forms.TabPage();
@@ -98,7 +99,6 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openCssFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.t2_backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tabs.SuspendLayout();
             this.tab1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -666,6 +666,7 @@
             this.groupBox4.TabIndex = 30;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "选项";
+            this.ToolTip_Default.SetToolTip(this.groupBox4, "删除文件可能会导致其它引用无效，请谨慎使用");
             // 
             // t2_cbDeleteImage
             // 
@@ -700,6 +701,17 @@
             this.groupBox3.TabIndex = 29;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "处理日志";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(71, 0);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(29, 12);
+            this.linkLabel2.TabIndex = 20;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "清空";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // t2_log
             // 
@@ -864,17 +876,6 @@
             // 
             this.t2_backgroundWorker.WorkerSupportsCancellation = true;
             this.t2_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t2_backgroundWorker_DoWork);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(71, 0);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel2.TabIndex = 20;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "清空";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // MainForm
             // 

@@ -36,21 +36,25 @@ namespace hyjiacan.util.i2b
         #region tab1
         private string clsTemp;
 
-
+        /// <summary>
+        /// tab1 初始化
+        /// </summary>
         private void tab1Init()
         {
             t1_tFileName.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "style-" + DateTime.Now.ToString("yyMMddHHmmss") + ".css");
+            // 生成CSS类结构模板
             clsTemp = @"
 .{0}{1}{2} {{
     {3}: url({4}) {5};
 }}
 ";
+            // 这里调用是为了在窗口打开的时候显示模板
             UpdateDemo();
         }
 
         #region // 窗体按钮功能
         /// <summary>
-        /// 选择图片
+        /// 选择图片文件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -70,6 +74,11 @@ namespace hyjiacan.util.i2b
             }
         }
 
+        /// <summary>
+        /// 移除列表中选中的图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bRemoveSelected_Click(object sender, EventArgs e)
         {
             ListView.SelectedListViewItemCollection items = t1_imageList.SelectedItems;
@@ -80,13 +89,19 @@ namespace hyjiacan.util.i2b
             }
         }
 
+        /// <summary>
+        /// 移除列表中的所有文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bRemoveAll_Click(object sender, EventArgs e)
         {
             t1_imageList.Items.Clear();
             xImageList.Images.Clear();
         }
+        
         /// <summary>
-        /// 生成图片的base64
+        /// 开始处理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,6 +113,10 @@ namespace hyjiacan.util.i2b
         #endregion
 
         #region // 生成任务
+
+        /// <summary>
+        /// 启动后台线程
+        /// </summary>
         void Start()
         {
             if (t1_imageList.Items.Count > 0)
@@ -111,6 +130,11 @@ namespace hyjiacan.util.i2b
             }
         }
 
+        /// <summary>
+        /// 后台线程的处理方法，此函数将根据图片生成对应的CSS文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void t1_backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -170,11 +194,21 @@ namespace hyjiacan.util.i2b
         #endregion
 
         #region 处理拖拽的图片
+        /// <summary>
+        /// 松开拖放的鼠标按钮，将图片显示到列表中
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void t1_imageList_DragDrop(object sender, DragEventArgs e)
         {
             ShowImages((string[])e.Data.GetData("FileDrop"));
         }
 
+        /// <summary>
+        /// 鼠标拖动文件到列表中，判断文件是否是图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void t1_imageList_DragEnter(object sender, DragEventArgs e)
         {
             string[] ps = (string[])e.Data.GetData("FileDrop");
@@ -190,11 +224,21 @@ namespace hyjiacan.util.i2b
         #endregion
 
         #region // 事件绑定
+        /// <summary>
+        /// 模板属性编辑时，实时更新模板内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void input_TextChanged(object sender, EventArgs e)
         {
             UpdateDemo();
         }
 
+        /// <summary>
+        /// 列表中的项激活（双击项）时，复制项对应图片的Base64编码数据到剪贴板中
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imageList_ItemActivate(object sender, EventArgs e)
         {
             Clipboard.SetText(GetBase64(t1_imageList.FocusedItem.Tag.ToString()), TextDataFormat.Text);
@@ -204,8 +248,10 @@ namespace hyjiacan.util.i2b
 
         #region // 私有功能
 
-
-
+        /// <summary>
+        /// 将图片依次添加到列表中显示
+        /// </summary>
+        /// <param name="files"></param>
         private void ShowImages(IList<string> files)
         {
             // 向图片列表中添加项
@@ -236,7 +282,9 @@ namespace hyjiacan.util.i2b
             });
         }
 
-
+        /// <summary>
+        /// 更新生成的CSS类模板
+        /// </summary>
         private void UpdateDemo()
         {
             string prefix = t1_tPrefix.Text.Trim();
@@ -267,7 +315,7 @@ namespace hyjiacan.util.i2b
         #endregion
 
         #region tab2
-        // 工作目录
+        // 工作目录或文件
         string path;
         // 当前扫描目录
         string currentPath;
@@ -422,6 +470,7 @@ namespace hyjiacan.util.i2b
                 if (MessageBox.Show(this, t2_rPath.Checked ? "共扫描到" + files.Count + "个CSS文件，是否开始处理？" : "是否立即处理？", "操作确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     x("开始处理...");
+                    // 匹配  url (地址)
                     Regex reg = new Regex(@"url\s*\(\s*[\'\""]{0,1}\s*(.+?\.(png|jpg|jpeg|bmp|gif|svg))\s*[\'\""]{0,1}\s*\)", RegexOptions.IgnoreCase & RegexOptions.Multiline);
                     foreach (string filename in files)
                     {
