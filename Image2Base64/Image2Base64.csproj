@@ -35,7 +35,7 @@
     <StartupObject>hyjiacan.util.i2b.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo.image2base64.ico</ApplicationIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,9 +78,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="400x400.trans.png" />
     <Content Include="group.png" />
-    <Content Include="logo.image2base64.ico" />
+    <Content Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

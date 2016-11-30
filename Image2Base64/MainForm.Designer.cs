@@ -120,17 +120,15 @@
             // 
             // tabs
             // 
-            this.tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabs.Controls.Add(this.tab1);
             this.tabs.Controls.Add(this.tab2);
             this.tabs.Controls.Add(this.tabAbout);
-            this.tabs.Location = new System.Drawing.Point(12, 12);
+            this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabs.Location = new System.Drawing.Point(0, 0);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.ShowToolTips = true;
-            this.tabs.Size = new System.Drawing.Size(836, 484);
+            this.tabs.Size = new System.Drawing.Size(860, 511);
             this.tabs.TabIndex = 0;
             // 
             // tab1
@@ -144,7 +142,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 22);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(828, 458);
+            this.tab1.Size = new System.Drawing.Size(852, 485);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "处理图片";
             this.tab1.ToolTipText = "将选择的图片生成一个CSS文件";
@@ -158,7 +156,7 @@
             this.groupBox2.Controls.Add(this.t1_rSpecCharDash);
             this.groupBox2.Controls.Add(this.t1_rSpecCharUnderline);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(500, 179);
+            this.groupBox2.Location = new System.Drawing.Point(524, 179);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(311, 84);
             this.groupBox2.TabIndex = 22;
@@ -173,7 +171,7 @@
             this.t1_cbDelSpecCharTail.Location = new System.Drawing.Point(172, 62);
             this.t1_cbDelSpecCharTail.Name = "t1_cbDelSpecCharTail";
             this.t1_cbDelSpecCharTail.Size = new System.Drawing.Size(120, 16);
-            this.t1_cbDelSpecCharTail.TabIndex = 28;
+            this.t1_cbDelSpecCharTail.TabIndex = 3;
             this.t1_cbDelSpecCharTail.Text = "删除结尾特殊字符";
             this.t1_cbDelSpecCharTail.UseVisualStyleBackColor = true;
             // 
@@ -185,7 +183,7 @@
             this.t1_cbDelSpecCharHead.Location = new System.Drawing.Point(9, 62);
             this.t1_cbDelSpecCharHead.Name = "t1_cbDelSpecCharHead";
             this.t1_cbDelSpecCharHead.Size = new System.Drawing.Size(120, 16);
-            this.t1_cbDelSpecCharHead.TabIndex = 27;
+            this.t1_cbDelSpecCharHead.TabIndex = 2;
             this.t1_cbDelSpecCharHead.Text = "删除开头特殊字符";
             this.t1_cbDelSpecCharHead.UseVisualStyleBackColor = true;
             // 
@@ -196,7 +194,7 @@
             this.t1_rSpecCharDash.Location = new System.Drawing.Point(271, 25);
             this.t1_rSpecCharDash.Name = "t1_rSpecCharDash";
             this.t1_rSpecCharDash.Size = new System.Drawing.Size(29, 16);
-            this.t1_rSpecCharDash.TabIndex = 26;
+            this.t1_rSpecCharDash.TabIndex = 1;
             this.t1_rSpecCharDash.TabStop = true;
             this.t1_rSpecCharDash.Text = "-";
             this.ToolTip_Default.SetToolTip(this.t1_rSpecCharDash, "连字符");
@@ -208,7 +206,7 @@
             this.t1_rSpecCharUnderline.Location = new System.Drawing.Point(221, 25);
             this.t1_rSpecCharUnderline.Name = "t1_rSpecCharUnderline";
             this.t1_rSpecCharUnderline.Size = new System.Drawing.Size(29, 16);
-            this.t1_rSpecCharUnderline.TabIndex = 25;
+            this.t1_rSpecCharUnderline.TabIndex = 0;
             this.t1_rSpecCharUnderline.Text = "_";
             this.ToolTip_Default.SetToolTip(this.t1_rSpecCharUnderline, "下划线");
             this.t1_rSpecCharUnderline.UseVisualStyleBackColor = true;
@@ -230,17 +228,17 @@
             this.t1_log.AutoEllipsis = true;
             this.t1_log.BackColor = System.Drawing.Color.Black;
             this.t1_log.ForeColor = System.Drawing.Color.Red;
-            this.t1_log.Location = new System.Drawing.Point(498, 426);
+            this.t1_log.Location = new System.Drawing.Point(522, 426);
             this.t1_log.Name = "t1_log";
-            this.t1_log.Size = new System.Drawing.Size(317, 23);
-            this.t1_log.TabIndex = 21;
+            this.t1_log.Size = new System.Drawing.Size(317, 50);
+            this.t1_log.TabIndex = 0;
             this.t1_log.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.t1_tDemo);
-            this.groupBox1.Location = new System.Drawing.Point(498, 334);
+            this.groupBox1.Location = new System.Drawing.Point(522, 334);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(313, 86);
             this.groupBox1.TabIndex = 20;
@@ -265,7 +263,7 @@
             this.btnGroup.Controls.Add(this.t1_bRemoveSelected);
             this.btnGroup.Controls.Add(this.t1_bRemoveAll);
             this.btnGroup.Controls.Add(this.t1_bRun);
-            this.btnGroup.Location = new System.Drawing.Point(498, 269);
+            this.btnGroup.Location = new System.Drawing.Point(522, 269);
             this.btnGroup.Name = "btnGroup";
             this.btnGroup.Size = new System.Drawing.Size(313, 59);
             this.btnGroup.TabIndex = 19;
@@ -279,7 +277,7 @@
             this.t1_bSelectImage.Location = new System.Drawing.Point(11, 22);
             this.t1_bSelectImage.Name = "t1_bSelectImage";
             this.t1_bSelectImage.Size = new System.Drawing.Size(66, 29);
-            this.t1_bSelectImage.TabIndex = 4;
+            this.t1_bSelectImage.TabIndex = 0;
             this.t1_bSelectImage.Text = "选择图片";
             this.t1_bSelectImage.UseVisualStyleBackColor = true;
             this.t1_bSelectImage.Click += new System.EventHandler(this.bSelectImage_Click);
@@ -291,7 +289,7 @@
             this.t1_bRemoveSelected.Location = new System.Drawing.Point(87, 22);
             this.t1_bRemoveSelected.Name = "t1_bRemoveSelected";
             this.t1_bRemoveSelected.Size = new System.Drawing.Size(66, 29);
-            this.t1_bRemoveSelected.TabIndex = 12;
+            this.t1_bRemoveSelected.TabIndex = 1;
             this.t1_bRemoveSelected.Text = "移除选中";
             this.t1_bRemoveSelected.UseVisualStyleBackColor = true;
             this.t1_bRemoveSelected.Click += new System.EventHandler(this.bRemoveSelected_Click);
@@ -303,7 +301,7 @@
             this.t1_bRemoveAll.Location = new System.Drawing.Point(163, 22);
             this.t1_bRemoveAll.Name = "t1_bRemoveAll";
             this.t1_bRemoveAll.Size = new System.Drawing.Size(66, 29);
-            this.t1_bRemoveAll.TabIndex = 11;
+            this.t1_bRemoveAll.TabIndex = 2;
             this.t1_bRemoveAll.Text = "移除所有";
             this.t1_bRemoveAll.UseVisualStyleBackColor = true;
             this.t1_bRemoveAll.Click += new System.EventHandler(this.bRemoveAll_Click);
@@ -315,7 +313,7 @@
             this.t1_bRun.Location = new System.Drawing.Point(239, 22);
             this.t1_bRun.Name = "t1_bRun";
             this.t1_bRun.Size = new System.Drawing.Size(66, 29);
-            this.t1_bRun.TabIndex = 5;
+            this.t1_bRun.TabIndex = 3;
             this.t1_bRun.Text = "生成CSS";
             this.t1_bRun.UseVisualStyleBackColor = true;
             this.t1_bRun.Click += new System.EventHandler(this.bRun_Click);
@@ -333,7 +331,7 @@
             this.configGroup.Controls.Add(this.label2);
             this.configGroup.Controls.Add(this.label3);
             this.configGroup.Controls.Add(this.label4);
-            this.configGroup.Location = new System.Drawing.Point(498, 6);
+            this.configGroup.Location = new System.Drawing.Point(522, 6);
             this.configGroup.Name = "configGroup";
             this.configGroup.Size = new System.Drawing.Size(313, 167);
             this.configGroup.TabIndex = 18;
@@ -347,7 +345,7 @@
             this.t1_tStyleName.Location = new System.Drawing.Point(91, 78);
             this.t1_tStyleName.Name = "t1_tStyleName";
             this.t1_tStyleName.Size = new System.Drawing.Size(216, 21);
-            this.t1_tStyleName.TabIndex = 23;
+            this.t1_tStyleName.TabIndex = 2;
             this.t1_tStyleName.TextChanged += new System.EventHandler(this.input_TextChanged);
             // 
             // label6
@@ -366,7 +364,7 @@
             this.t1_tOther.Location = new System.Drawing.Point(91, 107);
             this.t1_tOther.Name = "t1_tOther";
             this.t1_tOther.Size = new System.Drawing.Size(216, 21);
-            this.t1_tOther.TabIndex = 21;
+            this.t1_tOther.TabIndex = 3;
             this.t1_tOther.Text = "no-repeat";
             this.t1_tOther.TextChanged += new System.EventHandler(this.input_TextChanged);
             // 
@@ -377,7 +375,7 @@
             this.t1_tFileName.Location = new System.Drawing.Point(91, 136);
             this.t1_tFileName.Name = "t1_tFileName";
             this.t1_tFileName.Size = new System.Drawing.Size(216, 21);
-            this.t1_tFileName.TabIndex = 9;
+            this.t1_tFileName.TabIndex = 4;
             // 
             // t1_tSuffix
             // 
@@ -386,7 +384,7 @@
             this.t1_tSuffix.Location = new System.Drawing.Point(91, 49);
             this.t1_tSuffix.Name = "t1_tSuffix";
             this.t1_tSuffix.Size = new System.Drawing.Size(216, 21);
-            this.t1_tSuffix.TabIndex = 20;
+            this.t1_tSuffix.TabIndex = 1;
             this.t1_tSuffix.TextChanged += new System.EventHandler(this.input_TextChanged);
             // 
             // label1
@@ -405,7 +403,7 @@
             this.t1_tPrefix.Location = new System.Drawing.Point(91, 20);
             this.t1_tPrefix.Name = "t1_tPrefix";
             this.t1_tPrefix.Size = new System.Drawing.Size(216, 21);
-            this.t1_tPrefix.TabIndex = 19;
+            this.t1_tPrefix.TabIndex = 0;
             this.t1_tPrefix.TextChanged += new System.EventHandler(this.input_TextChanged);
             // 
             // label2
@@ -444,7 +442,7 @@
             this.imgGroup.Controls.Add(this.t1_imageList);
             this.imgGroup.Location = new System.Drawing.Point(6, 6);
             this.imgGroup.Name = "imgGroup";
-            this.imgGroup.Size = new System.Drawing.Size(486, 446);
+            this.imgGroup.Size = new System.Drawing.Size(510, 473);
             this.imgGroup.TabIndex = 17;
             this.imgGroup.TabStop = false;
             this.imgGroup.Text = "图片列表";
@@ -468,9 +466,9 @@
             this.t1_imageList.LargeImageList = this.xImageList;
             this.t1_imageList.Location = new System.Drawing.Point(3, 17);
             this.t1_imageList.Name = "t1_imageList";
-            this.t1_imageList.Size = new System.Drawing.Size(480, 426);
+            this.t1_imageList.Size = new System.Drawing.Size(504, 453);
             this.t1_imageList.StateImageList = this.stateImageList;
-            this.t1_imageList.TabIndex = 8;
+            this.t1_imageList.TabIndex = 0;
             this.t1_imageList.UseCompatibleStateImageBehavior = false;
             this.t1_imageList.ItemActivate += new System.EventHandler(this.imageList_ItemActivate);
             this.t1_imageList.DragDrop += new System.Windows.Forms.DragEventHandler(this.t1_imageList_DragDrop);
@@ -500,7 +498,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 22);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(828, 458);
+            this.tab2.Size = new System.Drawing.Size(852, 485);
             this.tab2.TabIndex = 2;
             this.tab2.Text = "处理CSS文件";
             this.tab2.ToolTipText = "替换CSS文件内的图片地址为Base64编码";
@@ -511,7 +509,7 @@
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.t2_rPath);
             this.groupBox8.Controls.Add(this.t2_rSingle);
-            this.groupBox8.Location = new System.Drawing.Point(568, 13);
+            this.groupBox8.Location = new System.Drawing.Point(592, 13);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(254, 71);
             this.groupBox8.TabIndex = 34;
@@ -521,7 +519,6 @@
             // t2_rPath
             // 
             this.t2_rPath.AutoSize = true;
-            this.t2_rPath.BackColor = System.Drawing.Color.White;
             this.t2_rPath.Checked = true;
             this.t2_rPath.Location = new System.Drawing.Point(16, 42);
             this.t2_rPath.Name = "t2_rPath";
@@ -534,7 +531,6 @@
             // t2_rSingle
             // 
             this.t2_rSingle.AutoSize = true;
-            this.t2_rSingle.BackColor = System.Drawing.Color.White;
             this.t2_rSingle.Location = new System.Drawing.Point(16, 20);
             this.t2_rSingle.Name = "t2_rSingle";
             this.t2_rSingle.Size = new System.Drawing.Size(89, 16);
@@ -550,7 +546,7 @@
             this.groupBox7.Controls.Add(this.t2_tPath);
             this.groupBox7.Location = new System.Drawing.Point(3, 13);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(556, 58);
+            this.groupBox7.Size = new System.Drawing.Size(580, 58);
             this.groupBox7.TabIndex = 33;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "选择CSS文件或目录";
@@ -559,10 +555,10 @@
             // 
             this.t2_bSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.t2_bSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.t2_bSelect.Location = new System.Drawing.Point(501, 18);
+            this.t2_bSelect.Location = new System.Drawing.Point(525, 18);
             this.t2_bSelect.Name = "t2_bSelect";
             this.t2_bSelect.Size = new System.Drawing.Size(45, 23);
-            this.t2_bSelect.TabIndex = 2;
+            this.t2_bSelect.TabIndex = 1;
             this.t2_bSelect.Text = "浏览";
             this.t2_bSelect.UseVisualStyleBackColor = true;
             this.t2_bSelect.Click += new System.EventHandler(this.t2_bSelect_Click);
@@ -575,8 +571,8 @@
             this.t2_tPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.t2_tPath.Location = new System.Drawing.Point(6, 20);
             this.t2_tPath.Name = "t2_tPath";
-            this.t2_tPath.Size = new System.Drawing.Size(482, 21);
-            this.t2_tPath.TabIndex = 1;
+            this.t2_tPath.Size = new System.Drawing.Size(506, 21);
+            this.t2_tPath.TabIndex = 0;
             // 
             // groupBox6
             // 
@@ -584,7 +580,7 @@
             this.groupBox6.Controls.Add(this.t2_tTotal);
             this.groupBox6.Controls.Add(this.t2_tCurrent);
             this.groupBox6.Controls.Add(this.label13);
-            this.groupBox6.Location = new System.Drawing.Point(568, 264);
+            this.groupBox6.Location = new System.Drawing.Point(592, 264);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(254, 53);
             this.groupBox6.TabIndex = 32;
@@ -597,7 +593,7 @@
             this.t2_tTotal.Location = new System.Drawing.Point(161, 19);
             this.t2_tTotal.Name = "t2_tTotal";
             this.t2_tTotal.Size = new System.Drawing.Size(86, 23);
-            this.t2_tTotal.TabIndex = 23;
+            this.t2_tTotal.TabIndex = 1;
             this.t2_tTotal.Text = "0";
             this.t2_tTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -607,7 +603,7 @@
             this.t2_tCurrent.Location = new System.Drawing.Point(53, 19);
             this.t2_tCurrent.Name = "t2_tCurrent";
             this.t2_tCurrent.Size = new System.Drawing.Size(81, 23);
-            this.t2_tCurrent.TabIndex = 24;
+            this.t2_tCurrent.TabIndex = 0;
             this.t2_tCurrent.Text = "0";
             this.t2_tCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -626,7 +622,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.t2_bStart);
             this.groupBox5.Controls.Add(this.t2_bStop);
-            this.groupBox5.Location = new System.Drawing.Point(568, 186);
+            this.groupBox5.Location = new System.Drawing.Point(592, 186);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(254, 72);
             this.groupBox5.TabIndex = 31;
@@ -639,7 +635,7 @@
             this.t2_bStart.Location = new System.Drawing.Point(47, 30);
             this.t2_bStart.Name = "t2_bStart";
             this.t2_bStart.Size = new System.Drawing.Size(75, 25);
-            this.t2_bStart.TabIndex = 20;
+            this.t2_bStart.TabIndex = 0;
             this.t2_bStart.Text = "开始";
             this.t2_bStart.UseVisualStyleBackColor = true;
             this.t2_bStart.Click += new System.EventHandler(this.t2_bStart_Click);
@@ -650,7 +646,7 @@
             this.t2_bStop.Location = new System.Drawing.Point(130, 30);
             this.t2_bStop.Name = "t2_bStop";
             this.t2_bStop.Size = new System.Drawing.Size(75, 25);
-            this.t2_bStop.TabIndex = 21;
+            this.t2_bStop.TabIndex = 1;
             this.t2_bStop.Text = "停止";
             this.t2_bStop.UseVisualStyleBackColor = true;
             this.t2_bStop.Click += new System.EventHandler(this.t2_bStop_Click);
@@ -660,7 +656,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.t2_cbDeleteImage);
             this.groupBox4.Controls.Add(this.t2_cbDeleteEmptyDir);
-            this.groupBox4.Location = new System.Drawing.Point(568, 97);
+            this.groupBox4.Location = new System.Drawing.Point(592, 97);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(254, 74);
             this.groupBox4.TabIndex = 30;
@@ -674,7 +670,7 @@
             this.t2_cbDeleteImage.Location = new System.Drawing.Point(13, 21);
             this.t2_cbDeleteImage.Name = "t2_cbDeleteImage";
             this.t2_cbDeleteImage.Size = new System.Drawing.Size(144, 16);
-            this.t2_cbDeleteImage.TabIndex = 27;
+            this.t2_cbDeleteImage.TabIndex = 0;
             this.t2_cbDeleteImage.Text = "删除处理过的图片文件";
             this.t2_cbDeleteImage.UseVisualStyleBackColor = true;
             // 
@@ -684,7 +680,7 @@
             this.t2_cbDeleteEmptyDir.Location = new System.Drawing.Point(13, 43);
             this.t2_cbDeleteEmptyDir.Name = "t2_cbDeleteEmptyDir";
             this.t2_cbDeleteEmptyDir.Size = new System.Drawing.Size(84, 16);
-            this.t2_cbDeleteEmptyDir.TabIndex = 28;
+            this.t2_cbDeleteEmptyDir.TabIndex = 1;
             this.t2_cbDeleteEmptyDir.Text = "移除空目录";
             this.t2_cbDeleteEmptyDir.UseVisualStyleBackColor = true;
             // 
@@ -697,7 +693,7 @@
             this.groupBox3.Controls.Add(this.t2_log);
             this.groupBox3.Location = new System.Drawing.Point(3, 77);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(556, 375);
+            this.groupBox3.Size = new System.Drawing.Size(580, 402);
             this.groupBox3.TabIndex = 29;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "处理日志";
@@ -725,8 +721,8 @@
             this.t2_log.Name = "t2_log";
             this.t2_log.ReadOnly = true;
             this.t2_log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.t2_log.Size = new System.Drawing.Size(540, 349);
-            this.t2_log.TabIndex = 19;
+            this.t2_log.Size = new System.Drawing.Size(564, 376);
+            this.t2_log.TabIndex = 0;
             // 
             // lProceed
             // 
@@ -750,7 +746,7 @@
             this.tabAbout.Location = new System.Drawing.Point(4, 22);
             this.tabAbout.Name = "tabAbout";
             this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(828, 458);
+            this.tabAbout.Size = new System.Drawing.Size(852, 485);
             this.tabAbout.TabIndex = 1;
             this.tabAbout.Text = "关于";
             this.tabAbout.UseVisualStyleBackColor = true;
@@ -758,24 +754,23 @@
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label12.BackColor = System.Drawing.Color.DodgerBlue;
             this.label12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(398, 96);
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(410, 109);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(195, 25);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Javascript中文社区";
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Javascript 爱好者";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(436, 207);
+            this.linkLabel1.Location = new System.Drawing.Point(448, 220);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(167, 12);
-            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "http://www.hyjiacan.com/i2b";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -784,7 +779,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(399, 208);
+            this.label11.Location = new System.Drawing.Point(411, 221);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 12);
             this.label11.TabIndex = 8;
@@ -795,7 +790,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(503, 163);
+            this.pictureBox2.Location = new System.Drawing.Point(515, 176);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(90, 22);
             this.pictureBox2.TabIndex = 7;
@@ -808,18 +803,18 @@
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(436, 170);
+            this.textBox1.Location = new System.Drawing.Point(448, 183);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(73, 14);
-            this.textBox1.TabIndex = 6;
+            this.textBox1.TabIndex = 2;
             this.textBox1.Text = "187786345";
             // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(399, 171);
+            this.label10.Location = new System.Drawing.Point(411, 184);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 12);
             this.label10.TabIndex = 4;
@@ -829,17 +824,17 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(434, 138);
+            this.label9.Location = new System.Drawing.Point(446, 151);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 3;
+            this.label9.TabIndex = 1;
             this.label9.Text = "hyjiacan";
             // 
             // label8
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(399, 138);
+            this.label8.Location = new System.Drawing.Point(411, 151);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 1;
@@ -849,7 +844,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(255, 93);
+            this.pictureBox1.Location = new System.Drawing.Point(267, 106);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 128);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
