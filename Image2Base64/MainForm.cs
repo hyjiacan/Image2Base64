@@ -31,6 +31,8 @@ namespace hyjiacan.util.i2b
 
             tab1Init();
             tab2Init();
+
+            lbVersion.Text = "v " + Application.ProductVersion;
         }
 
         #region tab1
@@ -755,6 +757,7 @@ namespace hyjiacan.util.i2b
         }
 
         #endregion
+
 
     }
 }

@@ -90,8 +90,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lbVersion = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ToolTip_Default = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -734,14 +733,14 @@
             // 
             // tabAbout
             // 
+            this.tabAbout.BackColor = System.Drawing.Color.White;
             this.tabAbout.Controls.Add(this.label12);
             this.tabAbout.Controls.Add(this.linkLabel1);
             this.tabAbout.Controls.Add(this.label11);
             this.tabAbout.Controls.Add(this.pictureBox2);
             this.tabAbout.Controls.Add(this.textBox1);
             this.tabAbout.Controls.Add(this.label10);
-            this.tabAbout.Controls.Add(this.label9);
-            this.tabAbout.Controls.Add(this.label8);
+            this.tabAbout.Controls.Add(this.lbVersion);
             this.tabAbout.Controls.Add(this.pictureBox1);
             this.tabAbout.Location = new System.Drawing.Point(4, 22);
             this.tabAbout.Name = "tabAbout";
@@ -749,25 +748,24 @@
             this.tabAbout.Size = new System.Drawing.Size(852, 485);
             this.tabAbout.TabIndex = 1;
             this.tabAbout.Text = "关于";
-            this.tabAbout.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(410, 109);
+            this.label12.Location = new System.Drawing.Point(416, 83);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(195, 25);
+            this.label12.Size = new System.Drawing.Size(121, 25);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Javascript 爱好者";
+            this.label12.Text = "Image2Base64";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(448, 220);
+            this.linkLabel1.Location = new System.Drawing.Point(376, 199);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(167, 12);
             this.linkLabel1.TabIndex = 3;
@@ -779,7 +777,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(411, 221);
+            this.label11.Location = new System.Drawing.Point(339, 200);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 12);
             this.label11.TabIndex = 8;
@@ -790,7 +788,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(515, 176);
+            this.pictureBox2.Location = new System.Drawing.Point(443, 155);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(90, 22);
             this.pictureBox2.TabIndex = 7;
@@ -803,7 +801,7 @@
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(448, 183);
+            this.textBox1.Location = new System.Drawing.Point(376, 162);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(73, 14);
@@ -814,39 +812,29 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(411, 184);
+            this.label10.Location = new System.Drawing.Point(339, 163);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 12);
             this.label10.TabIndex = 4;
             this.label10.Text = "QQ群";
             // 
-            // label9
+            // lbVersion
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(446, 151);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "hyjiacan";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(411, 151);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 12);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "作者";
+            this.lbVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbVersion.AutoSize = true;
+            this.lbVersion.Location = new System.Drawing.Point(417, 121);
+            this.lbVersion.Name = "lbVersion";
+            this.lbVersion.Size = new System.Drawing.Size(47, 12);
+            this.lbVersion.TabIndex = 1;
+            this.lbVersion.Text = "v 1.0.0";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(267, 106);
+            this.pictureBox1.Location = new System.Drawing.Point(336, 83);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -955,13 +943,11 @@
         private System.Windows.Forms.CheckBox t1_cbDelSpecCharHead;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbVersion;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tab2;
         private System.Windows.Forms.TextBox t2_log;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -986,5 +972,6 @@
         private System.Windows.Forms.TextBox t2_tPath;
         private System.ComponentModel.BackgroundWorker t2_backgroundWorker;
         private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Label label12;
     }
 }
