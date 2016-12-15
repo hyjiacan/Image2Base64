@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -26,8 +26,7 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CheckForIllegalCrossThreadCalls = false;
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             tab1Init();
             tab2Init();
@@ -36,20 +35,22 @@ namespace hyjiacan.util.i2b
         }
 
         #region tab1
-        private string clsTemp;
+        /// <summary>
+        /// 生成CSS类结构模板
+        /// </summary>
+        private const string clsTemp = @"
+.{0}{1}{2} {{
+    {3}: url({4}) {5};
+}}
+";
 
         /// <summary>
         /// tab1 初始化
         /// </summary>
         private void tab1Init()
         {
-            t1_tFileName.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "style-" + DateTime.Now.ToString("yyMMddHHmmss") + ".css");
-            // 生成CSS类结构模板
-            clsTemp = @"
-.{0}{1}{2} {{
-    {3}: url({4}) {5};
-}}
-";
+            t1_tFileName.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "style-" + DateTime.Now.ToString("yyMMddHHmmss") + ".css");
+
             // 这里调用是为了在窗口打开的时候显示模板
             UpdateDemo();
         }
@@ -62,18 +63,14 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void bSelectImage_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+            if (openFileDialog.ShowDialog(this) != DialogResult.OK)
             {
-                List<string> files = new List<string>();
-                foreach (string item in openFileDialog.FileNames)
-                {
-                    if (GetMime(item) != string.Empty)
-                    {
-                        files.Add(item);
-                    }
-                }
-                ShowImages(files);
+                return;
             }
+
+            var files = openFileDialog.FileNames
+                .Where(f => GetMime(f) != string.Empty);
+            ShowImages(files);
         }
 
         /// <summary>
@@ -101,7 +98,7 @@ namespace hyjiacan.util.i2b
             t1_imageList.Items.Clear();
             xImageList.Images.Clear();
         }
-        
+
         /// <summary>
         /// 开始处理
         /// </summary>
@@ -150,7 +147,10 @@ namespace hyjiacan.util.i2b
                 bool trimtail = t1_cbDelSpecCharTail.Checked;
                 if (string.IsNullOrEmpty(name))
                 {
-                    t1_tStyleName.Text = "background";
+                    Invoke(new MethodInvoker(() =>
+                    {
+                        t1_tStyleName.Text = "background";
+                    }));
                     name = "background";
                 }
                 StringBuilder sb = new StringBuilder();
@@ -164,7 +164,7 @@ namespace hyjiacan.util.i2b
                     string filename = item.Text;
 
                     // 获取不带扩展名的文件名
-                    filename = filename.Substring(0, filename.LastIndexOf('.'));
+                    filename = Path.GetFileNameWithoutExtension(filename);
 
                     // 替换文件名中的特殊字符
                     filename = reg.Replace(filename, specChar.ToString());
@@ -180,17 +180,22 @@ namespace hyjiacan.util.i2b
 
                     sb.AppendFormat(clsTemp, prefix, filename, suffix, name, base64, other);
                 }
-                t1_log.Text = "生成完成，正在写文件...";
-                StreamWriter file = new StreamWriter(t1_tFileName.Text, false, Encoding.UTF8);
-                file.WriteLine(sb.ToString());
-                file.Flush();
-                file.Close();
-                t1_log.Text = "写文件完成";
+                Invoke(new MethodInvoker(() =>
+                {
+                    t1_log.Text = "生成完成，正在写文件...";
+                }));
+                File.WriteAllText(t1_tFileName.Text, sb.ToString(), Encoding.UTF8);
+                Invoke(new MethodInvoker(() =>
+                {
+                    t1_log.Text = "写文件完成";
+                }));
             }
             catch (Exception ex)
             {
-                t1_log.Text = "发生错误";
-                MessageBox.Show(this, ex.Message, "错误");
+                Invoke(new MethodInvoker(() =>
+                {
+                    t1_log.Text = ex.Message;
+                }));
             }
         }
         #endregion
@@ -203,7 +208,7 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void t1_imageList_DragDrop(object sender, DragEventArgs e)
         {
-            ShowImages((string[])e.Data.GetData("FileDrop"));
+            dropWorker.RunWorkerAsync(e.Data.GetData("FileDrop"));
         }
 
         /// <summary>
@@ -213,14 +218,14 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void t1_imageList_DragEnter(object sender, DragEventArgs e)
         {
-            string[] ps = (string[])e.Data.GetData("FileDrop");
-            if (ps.Length > 0)
+            string[] ps = e.Data.GetData("FileDrop") as string[];
+            if (ps == null || ps.Length == 0)
             {
-                string filename = ps[0];
-                if (!string.IsNullOrEmpty(GetMime(filename)))
-                {
-                    e.Effect = DragDropEffects.Link;
-                }
+                return;
+            }
+            if (ps.Any(f => !string.IsNullOrEmpty(GetMime(f))))
+            {
+                e.Effect = DragDropEffects.Link;
             }
         }
         #endregion
@@ -243,8 +248,9 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void imageList_ItemActivate(object sender, EventArgs e)
         {
-            Clipboard.SetText(GetBase64(t1_imageList.FocusedItem.Tag.ToString()), TextDataFormat.Text);
-            t1_log.Text = "已复制";
+            var name = t1_imageList.FocusedItem.Tag.ToString();
+            Clipboard.SetText(GetBase64(name), TextDataFormat.Text);
+            t1_log.Text = "已复制\"" + name + "\"的数据";
         }
         #endregion
 
@@ -254,34 +260,45 @@ namespace hyjiacan.util.i2b
         /// 将图片依次添加到列表中显示
         /// </summary>
         /// <param name="files"></param>
-        private void ShowImages(IList<string> files)
+        private void ShowImages(IEnumerable<string> files)
         {
-            // 向图片列表中添加项
-            foreach (string filename in files)
+            Invoke(new MethodInvoker(() =>
             {
-                try
-                {
-                    // 这里使用文件流，解决程序不关闭会一直占用资源的问题
-                    using (FileStream fs = new FileStream(filename, FileMode.Open))
-                    {
-                        Bitmap image = new Bitmap(fs);
-                        fs.Close();
-                        xImageList.Images.Add(filename, image);
-                    }
-                }
-                catch { }
-            }
-
-            // 显示图片
-            this.Invoke((MethodInvoker)delegate
-            {
+                var count = files.Count();
+                dropProgress.Maximum = count;
+                dropProgress.Value = 1;
+                Cursor = Cursors.WaitCursor;
+                var i = 0;
+                // 向图片列表中添加项            
                 foreach (string filename in files)
                 {
-                    ListViewItem item = t1_imageList.Items.Add(filename.Substring(filename.LastIndexOf(Path.DirectorySeparatorChar) + 1));
-                    item.Tag = filename;
-                    item.ImageKey = filename;
+                    try
+                    {
+                        // 这里使用文件流，解决程序不关闭会一直占用资源的问题
+                        using (FileStream fs = new FileStream(filename, FileMode.Open))
+                        {
+                            i++;
+                            Bitmap image = new Bitmap(fs);
+                            fs.Close();
+                            xImageList.Images.Add(filename, image);
+                            ListViewItem item = t1_imageList.Items.Add(Path.GetFileNameWithoutExtension(filename));
+                            item.Tag = item.ImageKey = filename;
+
+                            dropProgress.PerformStep();
+
+                            if (count > 8 && (i % 8 == 0 || count == i))
+                            {
+                                Application.DoEvents();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        t1_log.Text = ex.Message;
+                    }
                 }
-            });
+                Cursor = Cursors.Default;
+            }));
         }
 
         /// <summary>
@@ -338,19 +355,15 @@ namespace hyjiacan.util.i2b
         /// <param name="e"></param>
         private void t2_bSelect_Click(object sender, EventArgs e)
         {
-            if (t2_rPath.Checked)
+            if (t2_rPath.Checked && folderBrowserDialog.ShowDialog(this) == DialogResult.OK)
             {
-                if (folderBrowserDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    t2_tPath.Text = folderBrowserDialog.SelectedPath;
-                }
+                t2_tPath.Text = folderBrowserDialog.SelectedPath;
+                return;
             }
-            else
+
+            if (openCssFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                if (openCssFileDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    t2_tPath.Text = openCssFileDialog.FileName;
-                }
+                t2_tPath.Text = openCssFileDialog.FileName;
             }
         }
         /// <summary>
@@ -482,10 +495,7 @@ namespace hyjiacan.util.i2b
                             t2_tCurrent.Text = (++proceed).ToString();
                         }));
                         //读取　CSS文件内容                        
-                        string content = string.Empty;
-                        StreamReader sr = new StreamReader(filename);
-                        content = sr.ReadToEnd();
-                        sr.Close();
+                        string content = File.ReadAllText(filename);
 
                         if (!reg.IsMatch(content))
                         {
@@ -496,12 +506,7 @@ namespace hyjiacan.util.i2b
                         x("处理文件" + filename);
                         string newContent = reg.Replace(content, new MatchEvaluator(ReplaceURL));
                         // 写文件
-                        using (StreamWriter sw = new StreamWriter(filename))
-                        {
-                            sw.Write(newContent);
-                            sw.Flush();
-                            sw.Close();
-                        }
+                        File.WriteAllText(filename, newContent);
                     }
                     // 删除图片文件
                     if (t2_cbDeleteImage.Checked)
@@ -641,17 +646,26 @@ namespace hyjiacan.util.i2b
         {
             if (args == null || args.Length == 0)
             {
-                t2_log.AppendText(Environment.NewLine);
+                if (!InvokeRequired)
+                {
+                    t2_log.AppendText(Environment.NewLine);
+                    return;
+                }
+                Invoke(new MethodInvoker(() =>
+                {
+                    t2_log.AppendText(Environment.NewLine);
+                }));
                 return;
             }
-            foreach (object item in args)
+            if (!InvokeRequired)
             {
-                if (item != null)
-                {
-                    t2_log.AppendText(item.ToString());
-                }
+                t2_log.AppendText(string.Join("", args) + Environment.NewLine);
+                return;
             }
-            t2_log.AppendText(Environment.NewLine);
+            Invoke(new MethodInvoker(() =>
+            {
+                t2_log.AppendText(string.Join("", args) + Environment.NewLine);
+            }));
         }
         #endregion
 
@@ -756,8 +770,12 @@ namespace hyjiacan.util.i2b
             }
         }
 
+
         #endregion
 
-
+        private void dropWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ShowImages(e.Argument as string[]);
+        }
     }
 }

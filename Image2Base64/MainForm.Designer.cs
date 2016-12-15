@@ -98,6 +98,8 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openCssFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.t2_backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.dropWorker = new System.ComponentModel.BackgroundWorker();
+            this.dropProgress = new System.Windows.Forms.ProgressBar();
             this.tabs.SuspendLayout();
             this.tab1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -437,6 +439,7 @@
             this.imgGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.imgGroup.Controls.Add(this.dropProgress);
             this.imgGroup.Controls.Add(this.label5);
             this.imgGroup.Controls.Add(this.t1_imageList);
             this.imgGroup.Location = new System.Drawing.Point(6, 6);
@@ -860,6 +863,18 @@
             this.t2_backgroundWorker.WorkerSupportsCancellation = true;
             this.t2_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.t2_backgroundWorker_DoWork);
             // 
+            // dropWorker
+            // 
+            this.dropWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.dropWorker_DoWork);
+            // 
+            // dropProgress
+            // 
+            this.dropProgress.Location = new System.Drawing.Point(254, 0);
+            this.dropProgress.Name = "dropProgress";
+            this.dropProgress.Size = new System.Drawing.Size(250, 11);
+            this.dropProgress.Step = 1;
+            this.dropProgress.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -973,5 +988,7 @@
         private System.ComponentModel.BackgroundWorker t2_backgroundWorker;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label12;
+        private System.ComponentModel.BackgroundWorker dropWorker;
+        private System.Windows.Forms.ProgressBar dropProgress;
     }
 }
